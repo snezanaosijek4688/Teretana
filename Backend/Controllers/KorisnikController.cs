@@ -62,7 +62,10 @@ namespace Backend.Controllers
         {
             var SmjerIzBaze = _contex.Korisnici.Find(sifra);
             SmjerIzBaze.Ime = korisnik.Ime;
-           
+            SmjerIzBaze.Prezime = korisnik.Prezime;
+            SmjerIzBaze.Email = korisnik.Email;
+
+
 
             _contex.Korisnici.Update(SmjerIzBaze);
             _contex.SaveChanges();
