@@ -1,12 +1,13 @@
 using Backend.Data;
 using Backend.Models;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 
 namespace Backend.Controllers
 {
     [ApiController]
     [Route("api/v1/[controller]")]
-    public class KorisnikController
+    public class KorisnikController : ControllerBase
 
 
     {
@@ -22,6 +23,12 @@ namespace Backend.Controllers
         {
             return new JsonResult(_contex.Korisnici.ToList());
         }
+        [HttpGet]
+        [Route("{sifra:int}")]
+        public IActionResult GetBySifra(int sifra)
+        {
+            return new JsonResult(_contex.Korisnici.Find(sifra));
+        }
 
         [HttpPost]
         public IActionResult Post(Korisnik korisnik)
@@ -34,7 +41,7 @@ namespace Backend.Controllers
         }
 
         [HttpDelete]
-        [Route("{id:int}")]
+        [Route("{sifra:int}")]
         [Produces("application/json")]
 
         public IActionResult Delete(int sifra)
@@ -48,7 +55,7 @@ namespace Backend.Controllers
 
         }
         [HttpPut]
-        [Route("{id:int}")]
+        [Route("{sifra:int}")]
 
 
         public IActionResult Put(int sifra, Korisnik korisnik)
